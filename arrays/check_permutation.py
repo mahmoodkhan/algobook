@@ -11,6 +11,11 @@ def is_permutation(str1: str, str2: str) -> bool:
     Assumptions:
         (1) str contains only characters from 'a' to 'z' 
         (2) integers are stored using 32 bits
+    pseudo code:
+    1. if the length of the two strings is not the same then it is not a permutation.
+    2. store each character of str1 as ascii value as a bit in the `checker` variable 
+    3. now check if the ascii value of each character in str2's is already set in the `checker`. If it is not
+    .. already set then it is a character that does not exist in str1 and therefore not a permutation
     """
     len1 = len(str1)
     len2 = len(str2)
@@ -34,6 +39,14 @@ def is_permutation(str1: str, str2: str) -> bool:
 
 
 def is_permutation2(str1: str, str2: str) -> bool:
+    """
+    pseudo code:
+    1. store each character in str1 as a key in a dictionary and the value incremented by 1 for each occurrence.
+    2. loop through each character in str2 and decrement the value by 1 for each occurrence.
+    3. if there is any key in the dictionary that has a value greater than zero, it means the two strings are not
+    .. a permutation of each other because there is at least a character in one string that does not exist in
+    .. the 2nd string.
+    """
     if len(str1) != len(str2):
         return False
 
@@ -47,6 +60,12 @@ def is_permutation2(str1: str, str2: str) -> bool:
     return not any(d.values())
 
 def is_permutation3(str1: str, str2: str) -> bool:
+    """
+    pseudo code:
+    1. sort each string
+    2. compare the sorted strings
+    3. if they're not the same, they're not a permutation of each other.
+    """
     if len(str1) != len(str2):
         return False
     s1_sorted = sorted(str1)

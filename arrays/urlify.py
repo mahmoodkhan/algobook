@@ -62,9 +62,8 @@ def helper_shift_array(chars: List[chr]) -> List[chr]:
     current_index: starts from the end of the array and goes towards left
     r: starts at the right most index of the array
     1. start at the end of the array and go left until the FIRST WHITESPACE is found
-    1a. mark the first whitespace by setting `r` to be the index of this first whitespace.
-    1b. set `first_whitespace_found` to true to indicate it is found
-    2. when the first white space is found going from right to left, set `r` to that index
+    2. now keep moving the `current_index` left until the first non-whitespace character is found
+    3. start moving non-whitespace chars with whitespace chars to the right
     """
     current_index: int = len(chars) - 1
     r: int = current_index

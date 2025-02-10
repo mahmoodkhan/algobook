@@ -9,6 +9,10 @@ def is_unique(string: str) -> bool:
         (1) str contains only characters from 'a' to 'z' 
         (2) integers are stored using 32 bits
     src: https://www.geeksforgeeks.org/efficiently-check-string-duplicates-without-using-additional-data-structure/
+    pseudo code:
+    1. get the ascii value for each element in the array
+    2. set the ascii value as a bit in the `checker` variable: `checker |= (1 << val)`
+    3. before setting the above bit, first check if it is already set, if it is then there is a duplicate
     """
     # An integer to store presence/absence of 26 characters using its 32 bits
     checker = 0
@@ -25,6 +29,9 @@ def is_unique(string: str) -> bool:
     return True
 
 def is_unique_brute_force(string: str) -> bool:
+    """
+    1. compare each element every other element in the array; very inefficient.
+    """
     length = len(string)
     for i in range(length):
         for j in range(i+1, length):
@@ -33,6 +40,10 @@ def is_unique_brute_force(string: str) -> bool:
     return True
 
 def is_unique_using_list(string: str) -> bool:
+    """
+    1. sort the string array
+    2. if the two adjacent elements are the same, then there is a duplicate
+    """
     mylist = list(string)
     mylist.sort()
     for i in range(len(mylist)-1):
