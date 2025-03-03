@@ -15,6 +15,14 @@ from typing import List
 TEXT = 'tact coa'
 
 class Solution1:
+    """
+    We know that for a string to be a palindrome, all characters have to be even or at most one odd character.
+    So in this solution, we build a frequency array, which keeps track of how many times each letter in the string
+    occurs.
+    Then we iterate over this frequency array to find out how many odd occurrences of letters there are. If there is
+    more than one odd occurrence then it is not a palindrome.
+    """
+
     def _build_frequency_array(self, text: str) -> List:
         frequency_array = [0] * 26
         for c in text:
@@ -50,7 +58,7 @@ class Solution2:
     .. and then back to 0)
     3. At the end of the loop, I check that at most one bit is set to 1 in the integer. For a string to be a palindrome
     .. there has to be at most one odd letter or no odd letters at all. So suppose there is one odd letter and the 
-    .. integer (used bit vector) will look something like 00010000 so I subtract 1 from it, we'll get 00001111. Note
+    .. integer (used as bit vector) will look something like 00010000 so I subtract 1 from it, we'll get 00001111. Note
     .. that there is no overlap so if I don an & (bitwise AND) operation we'll get:
     .. 00010000 & 00001111 = 0, which means there is one odd letter and thus the string is a palindrome.
     .. 
