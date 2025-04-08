@@ -53,23 +53,23 @@ class Solution2:
     This solution only considers lower case english letters; ignoring everything else.
 
     All I need to know is whether the count of each letter is even or odd. I use a single integer (as a bit vector).
-    1. Map each letter to the ascii value between 0 and 25
+    1. Map each letter to the ascii value between 0th and 25th bit.
     2. Flip the integer bit at that ascii value. (If there are two `a` letters then the 0th bit will first flip to 1
-    .. and then back to 0)
+    .. and then back to 0 -- done by using XOR)
     3. At the end of the loop, I check that at most one bit is set to 1 in the integer. For a string to be a palindrome
     .. there has to be at most one odd letter or no odd letters at all. So suppose there is one odd letter and the 
     .. integer (used as bit vector) will look something like 00010000 so I subtract 1 from it, we'll get 00001111. Note
-    .. that there is no overlap so if I don an & (bitwise AND) operation we'll get:
+    .. that there is no overlap so if I perform a bitwise AND operation we'll get:
     .. 00010000 & 00001111 = 0, which means there is one odd letter and thus the string is a palindrome.
     .. 
     .. Now let's suppose there is no odd letter so the integer (bit vector) will look like 00000000 and if I subtract
     .. 1 from it, it will look like:
-    .. 00000000 - 1 = -1, it means there is no odd letters and the string is a palindrome
+    .. 00000000 - 1 = -1, it means there is no odd letters and thus the string is a palindrome
     ..
-    .. Finally if there is more than one odd letters then the integer (bit vector) might look like 00001011 and if  I
+    .. Finally if there is more than one odd letters then the integer (bit vector) might look like 00001011 and if I
     .. subtract 1 from it, it will look like:
     .. 00001011 - 1 = 00001010
-    .. 00001011 & 00001010 =  00001010, this value is greater than one meaning there is more than odd letter and thus 
+    .. 00001011 & 00001010 =  00001010, this value is greater than 1 meaning there is more than odd letters and thus
     .. not a palindrome text.
     """
     def is_palindrome(self, text: str) -> bool:
@@ -78,7 +78,7 @@ class Solution2:
             ascii_value = ord('z') - ord(c)
             if ascii_value < 0 or ascii_value > 26:
                 continue
-            mask ^= (1 << ascii_value)  # flip the bit
+            mask ^= (1 << ascii_value)  # flip the bit using xor operator
         opposite = mask - 1
         if (mask & opposite) > 1:
             return False
